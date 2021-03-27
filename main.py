@@ -4,7 +4,6 @@ from pygame import locals
 import os
 from time import sleep
 from configuracoes import *
-
 while True:
     relogio.tick(30)
     tela.fill(cor_tela)
@@ -25,10 +24,10 @@ while True:
                     fase1.play()
                 else:
                     pass
-            if event.key == K_d:
-                ci.vai()
-            if event.key == K_a:
-                ci.volta()
+            if start:
+                chao.movimentar()
+                arbusto.movimentar()
+                arvore.movimentar()
             if event.key == K_w:
                 ci.pular()
             if event.key == K_q:

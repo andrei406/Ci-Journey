@@ -48,17 +48,11 @@ class Ci(pygame.sprite.Sprite):
                 self.pulo = False
             else:
                 self.rect.y -=20
-                self.rect.x += 30
-                '''if self.vai:
-                    '''
-                '''else:
-                    self.rect.x -=10'''
-        elif self.desce == True:
+        elif self.desce:
             if self.rect.y >= altura - 130:
                 self.desce = False
             self.rect.y +=20
-            self.rect.x += 30
-        elif self.siga == True:
+        elif self.siga:
             if self.rect.x >= 940:
                 self.siga = False
             else:
@@ -73,14 +67,29 @@ class Ci(pygame.sprite.Sprite):
                 self.index_lista = 0
             self.index_lista += .10
             self.image = self.ci_img[int(self.index_lista)]
+"""class Nuvens(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self):
+        self.image = sprite.sheet.subsurface()"""
 class Chao(pygame.sprite.Sprite):
     def __init__(self, pos_x):
+        self.movimento = False
+        self.velocidade = 10
         pygame.sprite.Sprite.__init__(self)
         self.image = cenario_shet.subsurface(((32 * 3) - 32, 0), (32, 32))
         self.image = pygame.transform.scale(self.image, (32*a, 32*a))
         self.rect = self.image.get_rect()
         self.rect.y = altura - 60
         self.rect.x = pos_x * 64
+    def movimentar(self):
+        self.movimento = True
+    def update(self):
+        if self.movimento:
+            if self.rect.topright[0] < 0:
+                self.rect.x = largura
+                if self.velocidade < 50:
+                    self.velocidade += 5
+            self.rect.x -= self.velocidade
 class Sol(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -89,16 +98,21 @@ class Sol(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = largura - 90
         self.rect.y = altura - 620
-class Arvore(pygame.sprite.Sprite):
+class Arvore(Chao):
     def __init__(self):
+        self.movimento = False
+        self.velocidade = 10
         pygame.sprite.Sprite.__init__(self)
         self.image = cenario_shet.subsurface((0,64), (32,32))
         self.image = pygame.transform.scale(self.image, (32* 7, 32*7))
         self.rect = self.image.get_rect()
         self.rect.x = largura - 300
         self.rect.y = altura - 270
-class Arbusto(pygame.sprite.Sprite):
+class Arbusto(Chao):
     def __init__(self):
+        self.movimento = False
+        self.velocidade = 10
+
         pygame.sprite.Sprite.__init__(self)
         self.image = cenario_shet.subsurface((32, 64), (32, 32))
         self.image = pygame.transform.scale(self.image, (32 * 5, 32 *5))
