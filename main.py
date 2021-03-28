@@ -20,7 +20,7 @@ while True:
                     start = True
                     sleep(3)
                     tela.fill((0,0,0))
-                    sleep(5)
+                    #sleep(5)
                     fase1.play()
                 else:
                     pass
@@ -28,6 +28,7 @@ while True:
                 chao.movimentar()
                 arbusto.movimentar()
                 arvore.movimentar()
+                inimigo.movimentar()
             if event.key == K_w:
                 ci.pular()
             if event.key == K_q:

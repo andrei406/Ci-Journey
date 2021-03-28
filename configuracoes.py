@@ -35,3 +35,6 @@ todasSprites.add(arvore)
 
 ci = Ci()
 todasSprites.add(ci)
+
+inimigo = Inimigos()
+todasSprites.add(inimigo)

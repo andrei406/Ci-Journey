@@ -18,6 +18,7 @@ diretorio_m = os.path.join(diretorio_p, 'musicas')
 
 ci_shet = pygame.image.load(os.path.join(diretorio_i, 'ci-princes-sprites.png')).convert_alpha()
 cenario_shet = pygame.image.load(os.path.join(diretorio_i, 'cenario-sprites.png'))
+inimigos_shet = pygame.image.load(os.path.join(diretorio_i, 'inimigos.png'))
 
 class Ci(pygame.sprite.Sprite):
     def __init__(self):
@@ -89,6 +90,34 @@ class Chao(pygame.sprite.Sprite):
                 self.rect.x = largura
                 if self.velocidade < 50:
                     self.velocidade += 5
+            self.rect.x -= self.velocidade
+class Inimigos(Chao):
+    def __init__(self,):
+        pygame.sprite.Sprite.__init__(self)
+        self.velocidade = 10
+        self.movimento = False
+        self.inimigo_img = []
+        self.pulo = False
+        for i in range(2):
+            img = inimigos_shet.subsurface((0, 32 * i),(32,32))
+            img= pygame.transform.scale(img, (32* 4, 32 * 4))
+            self.inimigo_img.append(img)
+        self.index_lista = 0
+        self.image = self.inimigo_img[self.index_lista]
+        self.rect = self.image.get_rect()
+        self.rect.center = (750, altura-120)
+    def movimentar(self):
+        self.movimento = True
+    def update(self):
+        if self.movimento:
+            if self.index_lista > 1:
+                self.index_lista = 0
+                self.index_lista += .10
+                self.image = self.inimigo_img[int(self.index_lista)]
+            if self.rect.topright[0] < 0:
+                self.rect.x = largura
+                if self.velocidade < 50:
+                    self.velocidade += 4
             self.rect.x -= self.velocidade
 class Sol(pygame.sprite.Sprite):
     def __init__(self):
