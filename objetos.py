@@ -1,4 +1,5 @@
 from os import path
+from time import sleep
 import pygame
 from pygame import locals
 import os
@@ -48,13 +49,13 @@ class Ci(pygame.sprite.Sprite):
                 self.desce = True
                 self.pulo = False
             else:
-                self.rect.y -=20
+                self.rect.y -=50
         elif self.desce:
-            if self.rect.y >= altura - 130:
+            if self.rect.y >= altura - 200:
                 self.desce = False
-            self.rect.y +=20
+            self.rect.y +=50
         elif self.siga:
-            if self.rect.x >= 940:
+            if self.rect.x >= 960:
                 self.siga = False
             else:
                 self.rect.x += 20
@@ -74,6 +75,7 @@ class Ci(pygame.sprite.Sprite):
         self.image = sprite.sheet.subsurface()"""
 class Chao(pygame.sprite.Sprite):
     def __init__(self, pos_x):
+        self.voltas = 0
         self.movimento = False
         self.velocidade = 10
         pygame.sprite.Sprite.__init__(self)
@@ -84,15 +86,24 @@ class Chao(pygame.sprite.Sprite):
         self.rect.x = pos_x * 64
     def movimentar(self):
         self.movimento = True
+    def maisRapido(self):
+        self.velocidade += 10
+    def menosRapido(self):
+        self.velocidade -= 10
     def update(self):
         if self.movimento:
             if self.rect.topright[0] < 0:
                 self.rect.x = largura
+                self.voltas += 1
+                print(self.voltas)
                 if self.velocidade < 50:
                     self.velocidade += 5
+                if self.voltas > 37:
+                    self.velocidade = 60
             self.rect.x -= self.velocidade
 class Inimigos(Chao):
-    def __init__(self,):
+    def __init__(self):
+        self.voltas = 0
         pygame.sprite.Sprite.__init__(self)
         self.velocidade = 10
         self.movimento = False
@@ -105,10 +116,10 @@ class Inimigos(Chao):
         self.index_lista = 0
         self.image = self.inimigo_img[self.index_lista]
         self.rect = self.image.get_rect()
-        self.rect.center = (750, altura-120)
+        self.rect.center = (1070, altura-120)
     def movimentar(self):
         self.movimento = True
-    def update(self):
+"""    def update(self):
         if self.movimento:
             if self.index_lista > 1:
                 self.index_lista = 0
@@ -118,7 +129,7 @@ class Inimigos(Chao):
                 self.rect.x = largura
                 if self.velocidade < 50:
                     self.velocidade += 4
-            self.rect.x -= self.velocidade
+            self.rect.x -= self.velocidade"""
 class Sol(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -127,8 +138,17 @@ class Sol(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = largura - 90
         self.rect.y = altura - 620
+class Lua(Sol):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = cenario_shet.subsurface((64, 32), (32, 32))
+        self.image = pygame.transform.scale(self.image, (32*3, 32*3))
+        self.rect = self.image.get_rect()
+        self.rect.x = largura - 90
+        self.rect.y = altura - 620
 class Arvore(Chao):
     def __init__(self):
+        self.voltas = 0
         self.movimento = False
         self.velocidade = 10
         pygame.sprite.Sprite.__init__(self)
@@ -139,9 +159,9 @@ class Arvore(Chao):
         self.rect.y = altura - 270
 class Arbusto(Chao):
     def __init__(self):
+        self.voltas = 0
         self.movimento = False
         self.velocidade = 10
-
         pygame.sprite.Sprite.__init__(self)
         self.image = cenario_shet.subsurface((32, 64), (32, 32))
         self.image = pygame.transform.scale(self.image, (32 * 5, 32 *5))

@@ -14,13 +14,12 @@ while True:
         if event.type == KEYDOWN:
             if event.key == K_SPACE:
                 if start == False:
-                    select.play()
                     musica_intro.set_volume(0)
                     del musica_intro
+                    select.play()
                     start = True
-                    sleep(3)
+                    sleep(5)
                     tela.fill((0,0,0))
-                    #sleep(5)
                     fase1.play()
                 else:
                     pass
