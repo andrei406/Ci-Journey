@@ -20,7 +20,6 @@ while True:
                     start = True
                     sleep(5)
                     tela.fill((0,0,0))
-                    fase1.play()
                 else:
                     pass
             if start:
@@ -33,6 +32,15 @@ while True:
             if event.key == K_q:
                 pygame.quit()
                 exit()                          
-    todasSprites.draw(tela)
-    todasSprites.update()
-    pygame.display.flip()
+    colisoes = pygame.sprite.spritecollide(ci, grupo_sprite2, False, pygame.sprite.collide_mask)
+
+    if colisoes and colidiu == False:
+            print('colidiu')
+            colidiu = True
+    if colidiu:
+        pygame.quit
+        exit()
+    else:
+        todasSprites.draw(tela)
+        todasSprites.update()
+        pygame.display.flip()

@@ -34,6 +34,7 @@ class Ci(pygame.sprite.Sprite):
         self.index_lista = 0
         self.image = self.ci_img[self.index_lista]
         self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect.center = (50, altura-70) #(50, altura - 70)
     def vai(self):
         self.siga = True
@@ -45,11 +46,11 @@ class Ci(pygame.sprite.Sprite):
         self.desce = True
     def update(self):
         if self.pulo:
-            if self.rect.y <=400:
+            if self.rect.y <=100:
                 self.desce = True
                 self.pulo = False
             else:
-                self.rect.y -=50
+                self.rect.y -=35
         elif self.desce:
             if self.rect.y >= altura - 200:
                 self.desce = False
@@ -116,6 +117,7 @@ class Inimigos(Chao):
         self.index_lista = 0
         self.image = self.inimigo_img[self.index_lista]
         self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect.center = (1070, altura-120)
     def movimentar(self):
         self.movimento = True
