@@ -50,11 +50,12 @@ class Ci(pygame.sprite.Sprite):
                 self.desce = True
                 self.pulo = False
             else:
-                self.rect.y -=35
+                self.rect.y -=45
         elif self.desce:
-            if self.rect.y >= altura - 200:
+            if self.rect.y >= altura - 150:
+                self.pulo = False   
                 self.desce = False
-            self.rect.y +=50
+            self.rect.y +=35
         elif self.siga:
             if self.rect.x >= 960:
                 self.siga = False
@@ -91,16 +92,25 @@ class Chao(pygame.sprite.Sprite):
         self.velocidade += 10
     def menosRapido(self):
         self.velocidade -= 10
+    def denovo(self):
+        self.velocidade = 10
+        self.voltas = 0
+    def ficalonge(self):
+        self.rect.x += 500
     def update(self):
         if self.movimento:
             if self.rect.topright[0] < 0:
                 self.rect.x = largura
                 self.voltas += 1
                 print(self.voltas)
-                if self.velocidade < 50:
+                if self.velocidade < 30:
                     self.velocidade += 5
-                if self.voltas > 37:
+                elif self.voltas > 37:
                     self.velocidade = 60
+                elif self.voltas >= 185:
+                    self.velocidade = 5
+                elif self.voltas >= 200:
+                    self.movimento = False
             self.rect.x -= self.velocidade
 class Inimigos(Chao):
     def __init__(self):
