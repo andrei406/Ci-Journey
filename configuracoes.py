@@ -5,21 +5,17 @@ import pygame
 from pygame import locals
 import os
 from time import sleep
-"""musica_intro = pygame.mixer.Sound(os.path.join(diretorio_m, 'intro.wav'))
-musica_intro.set_volume(.5)
-musica_intro.play(-1)"""
 
 fase1 = pygame.mixer.Sound(os.path.join(diretorio_m, 'fase1.wav'))
 fase1.set_volume(1)
-select = pygame.mixer.Sound(os.path.join(diretorio_m, 'selec.wav'))
-select.set_volume(1)
+
 fase1.play()
 
 n_colisoes = 0
 
 fim = pygame.mixer.Sound(os.path.join(diretorio_m, 'Game_over.wav'))
 fim.set_volume(1)
-cor_tela = (0, 0, 255)
+cor_tela = (0, 255, 255)
 
 a = 2
 pulou = False
@@ -34,8 +30,8 @@ for c in range(largura*2//64):
     chao = Chao(c)
     todasSprites.add(chao)
 
-lua = Lua()
-todasSprites.add(lua)
+sol = Sol()
+todasSprites.add(sol)
 
 inimigo = Inimigos()
 todasSprites.add(inimigo)

@@ -22,7 +22,6 @@ while True:
                 exit()                          
     colisoes = pygame.sprite.spritecollide(ci, grupo_sprite2, False, pygame.sprite.collide_mask)
     if colisoes and colidiu == False:
-        print('colidiu')
         colidiu = True
     if colidiu:
         chao.denovo()
@@ -39,15 +38,3 @@ while True:
     todasSprites.draw(tela)
     todasSprites.update()
     pygame.display.flip()
-"""    """
-        
-"""             if event.key == K_SPACE:
-                if start == False:
-                    musica_intro.set_volume(0)
-                    del musica_intro
-                    select.play()
-                    start = True
-                    sleep(5)
-                    tela.fill((0,0,0))
-                else:
-                    pass"""

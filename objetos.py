@@ -71,10 +71,6 @@ class Ci(pygame.sprite.Sprite):
                 self.index_lista = 0
             self.index_lista += .10
             self.image = self.ci_img[int(self.index_lista)]
-"""class Nuvens(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self):
-        self.image = sprite.sheet.subsurface()"""
 class Chao(pygame.sprite.Sprite):
     def __init__(self, pos_x):
         self.voltas = 0
@@ -100,17 +96,17 @@ class Chao(pygame.sprite.Sprite):
     def update(self):
         if self.movimento:
             if self.rect.topright[0] < 0:
-                self.rect.x = largura
+                self.rect.x = largura + 200
                 self.voltas += 1
-                print(self.voltas)
                 if self.velocidade < 30:
                     self.velocidade += 5
-                elif self.voltas > 37:
-                    self.velocidade = 60
-                elif self.voltas >= 185:
-                    self.velocidade = 5
-                elif self.voltas >= 200:
-                    self.movimento = False
+                elif self.voltas > 26:
+                    if self.velocidade <= 50:
+                        self.velocidade += 5
+                    elif self.voltas == 120:
+                        self.velocidade = 5
+                    elif self.voltas == 135:
+                        self.velocidade = 0
             self.rect.x -= self.velocidade
 class Inimigos(Chao):
     def __init__(self):
@@ -131,17 +127,6 @@ class Inimigos(Chao):
         self.rect.center = (1070, altura-120)
     def movimentar(self):
         self.movimento = True
-"""    def update(self):
-        if self.movimento:
-            if self.index_lista > 1:
-                self.index_lista = 0
-                self.index_lista += .10
-                self.image = self.inimigo_img[int(self.index_lista)]
-            if self.rect.topright[0] < 0:
-                self.rect.x = largura
-                if self.velocidade < 50:
-                    self.velocidade += 4
-            self.rect.x -= self.velocidade"""
 class Sol(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
