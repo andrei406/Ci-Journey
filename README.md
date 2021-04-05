@@ -1,6 +1,7 @@
 # Ci-Journey
  Ajude a Civillet a sair da floresta
- ! [print_game] (imagens/print_game.png)
+ 
+ ![print_game](imagens/print_game.png)
 
  ## Apenas corra
  Civillet está sendo atacada por todos os lugares da floresta, indefesa, a melhor escolha mesmo é fazer-la saltar por cima dos inimigos
