@@ -7,11 +7,6 @@ while True:
             pygame.quit()
             exit()
         if event.type == KEYDOWN:
-            if start:
-                chao.movimentar()
-                arbusto.movimentar()
-                arvore.movimentar()
-                inimigo.movimentar()
             if event.key == K_w:
                 if not ci.pulo and ci.desce:
                     pass
@@ -21,6 +16,11 @@ while True:
                 pygame.quit()
                 exit()                          
     colisoes = pygame.sprite.spritecollide(ci, grupo_sprite2, False, pygame.sprite.collide_mask)
+    if start:
+        chao.movimentar()
+        arbusto.movimentar()
+        arvore.movimentar()
+        inimigo.movimentar()
     if colisoes and colidiu == False:
         colidiu = True
     if colidiu:
