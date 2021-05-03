@@ -73,6 +73,7 @@ class Ci(pygame.sprite.Sprite):
             self.image = self.ci_img[int(self.index_lista)]
 class Chao(pygame.sprite.Sprite):
     def __init__(self, pos_x):
+        self.voltasCompletas = 0
         self.voltas = 0
         self.movimento = False
         self.velocidade = 10
@@ -84,6 +85,8 @@ class Chao(pygame.sprite.Sprite):
         self.rect.x = pos_x * 64
     def movimentar(self):
         self.movimento = True
+    def parar(self):
+        self.movimento = False
     def maisRapido(self):
         self.velocidade += 10
     def menosRapido(self):
@@ -98,18 +101,23 @@ class Chao(pygame.sprite.Sprite):
             if self.rect.topright[0] < 0:
                 self.rect.x = largura + 200
                 self.voltas += 1
-                if self.velocidade < 30:
+                print(self.voltas)
+            if self.voltas >= 5:
+                if self.velocidade <= 25:
                     self.velocidade += 5
-                elif self.voltas > 26:
-                    if self.velocidade <= 50:
+                elif self.voltas == 30:
+                    if self.velocidade <= 30:
                         self.velocidade += 5
-                    elif self.voltas == 120:
-                        self.velocidade = 5
-                    elif self.voltas == 135:
-                        self.velocidade = 0
+                elif self.voltas == 40:
+                    # A cada volta completa equilvame 40 voltas
+                    self.voltasCompletas += 1
+                    self.velocidade = 10
+                    self.voltas = 0
+
             self.rect.x -= self.velocidade
 class Inimigos(Chao):
     def __init__(self):
+        self.voltasCompletas = 0
         self.voltas = 0
         pygame.sprite.Sprite.__init__(self)
         self.velocidade = 10
@@ -145,6 +153,7 @@ class Lua(Sol):
         self.rect.y = altura - 620
 class Arvore(Chao):
     def __init__(self):
+        self.voltasCompletas = 0
         self.voltas = 0
         self.movimento = False
         self.velocidade = 10
@@ -156,6 +165,7 @@ class Arvore(Chao):
         self.rect.y = altura - 270
 class Arbusto(Chao):
     def __init__(self):
+        self.voltasCompletas = 0
         self.voltas = 0
         self.movimento = False
         self.velocidade = 10
@@ -165,3 +175,15 @@ class Arbusto(Chao):
         self.rect = self.image.get_rect()
         self.rect.x = largura - 700
         self.rect.y = altura - 190
+class Espinhos(Chao):
+    def __init__(self):
+        self.voltasCompletas = 0
+        self.voltas = 0
+        self.movimento = False
+        self.velocidade = 10
+        pygame.sprite.Sprite.__init__(self)
+        self.image = cenario_shet.subsurface((32 * 2, 32* 2), (32, 32))
+        self.image = pygame.transform.scale(self.image, (32 * 3, 32 * 3))
+        self.rect = self.image.get_rect()
+        self.rect.x = largura - 500
+        self.rect.y = altura - 130

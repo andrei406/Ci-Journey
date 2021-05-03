@@ -21,19 +21,21 @@ while True:
         arbusto.movimentar()
         arvore.movimentar()
         inimigo.movimentar()
+        #espinhos.movimentar()
     if colisoes and colidiu == False:
-        colidiu = True
+        ...
+        #colidiu = True
     if colidiu:
         chao.denovo()
         arbusto.denovo()
         arvore.denovo()
         inimigo.denovo()
         inimigo.ficalonge()
-        fase1.stop()
+        fase2.stop()
         sleep(0.2)
         fim.play()
         sleep(4)
-        fase1.play()
+        fase2.play()
         colidiu = False
     todasSprites.draw(tela)
     todasSprites.update()

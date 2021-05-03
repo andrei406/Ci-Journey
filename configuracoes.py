@@ -6,10 +6,10 @@ from pygame import locals
 import os
 from time import sleep
 
-fase1 = pygame.mixer.Sound(os.path.join(diretorio_m, 'fase1.wav'))
-fase1.set_volume(1)
+fase2 = pygame.mixer.Sound(os.path.join(diretorio_m, 'fase2.wav'))
+fase2.set_volume(1)
 
-fase1.play()
+fase2.play()
 
 n_colisoes = 0
 
@@ -25,6 +25,14 @@ todasSprites = pygame.sprite.Group()
 grupo_sprite2 = pygame.sprite.Group()
 
 relogio = pygame.time.Clock()
+arvore = Arvore()
+todasSprites.add(arvore)
+
+"""espinhos = Espinhos()
+todasSprites.add(espinhos)"""
+
+arbusto = Arbusto()
+todasSprites.add(arbusto)
 
 for c in range(largura*2//64):
     chao = Chao(c)
@@ -37,11 +45,7 @@ inimigo = Inimigos()
 todasSprites.add(inimigo)
 grupo_sprite2.add(inimigo)
 
-arvore = Arvore()
-todasSprites.add(arvore)
 
-arbusto = Arbusto()
-todasSprites.add(arbusto)
 
 ci = Ci()
 todasSprites.add(ci)
