@@ -52,10 +52,11 @@ class Ci(pygame.sprite.Sprite):
             else:
                 self.rect.y -=45
         elif self.desce:
-            if self.rect.y >= altura - 150:
+            if self.rect.y >= altura - 200:
+                self.rect.y = altura - 150
                 self.pulo = False   
                 self.desce = False
-            self.rect.y +=35
+            self.rect.y +=55
         elif self.siga:
             if self.rect.x >= 960:
                 self.siga = False
@@ -125,7 +126,7 @@ class Inimigos(Chao):
         self.inimigo_img = []
         self.pulo = False
         for i in range(2):
-            img = inimigos_shet.subsurface((0, 32 * i),(32,32))
+            img = inimigos_shet.subsurface((0 * i, 0),(32,32))
             img= pygame.transform.scale(img, (32* 4, 32 * 4))
             self.inimigo_img.append(img)
         self.index_lista = 0
@@ -185,5 +186,5 @@ class Espinhos(Chao):
         self.image = cenario_shet.subsurface((32 * 2, 32* 2), (32, 32))
         self.image = pygame.transform.scale(self.image, (32 * 3, 32 * 3))
         self.rect = self.image.get_rect()
-        self.rect.x = largura - 500
+        self.rect.x = largura + 500
         self.rect.y = altura - 130

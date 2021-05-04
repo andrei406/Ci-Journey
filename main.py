@@ -17,11 +17,24 @@ while True:
                 exit()                          
     colisoes = pygame.sprite.spritecollide(ci, grupo_sprite2, False, pygame.sprite.collide_mask)
     if start:
-        chao.movimentar()
-        arbusto.movimentar()
-        arvore.movimentar()
-        inimigo.movimentar()
-        #espinhos.movimentar()
+        if chao.voltasCompletas == 1:
+            if espinhoOk == False:
+                espinhos = Espinhos()
+                todasSprites.add(espinhos)
+                espinhos.movimentar()
+                espinhoOk = True
+        if chao.voltasCompletas == 2:
+            inimigo.rect.y = altura + 50
+            espinhos.rect.y = altura + 50
+            if arbusto.voltas == 4:
+                arbusto.rect.y = altura + 50
+            if arvore.voltas == 5:
+                arvore.rect.y = altura + 50
+        else:
+            chao.movimentar()
+            arbusto.movimentar()
+            arvore.movimentar()
+            inimigo.movimentar()
     if colisoes and colidiu == False:
         ...
         #colidiu = True

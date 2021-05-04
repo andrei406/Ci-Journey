@@ -34,6 +34,7 @@ todasSprites.add(espinhos)"""
 arbusto = Arbusto()
 todasSprites.add(arbusto)
 
+
 for c in range(largura*2//64):
     chao = Chao(c)
     todasSprites.add(chao)
@@ -51,3 +52,4 @@ ci = Ci()
 todasSprites.add(ci)
 
 colidiu = False
+espinhoOk = False
