@@ -21,11 +21,19 @@ while True:
             if espinhoOk == False:
                 espinhos = Espinhos()
                 todasSprites.add(espinhos)
+                grupo_sprite2.add(espinhos)
                 espinhos.movimentar()
                 espinhoOk = True
+            if not soldadoOk:
+                soldado = Soldado()
+                todasSprites.add(soldado)
+                grupo_sprite2.add(soldado)
+                soldado.movimentar()
+                soldadoOk = True
         if chao.voltasCompletas == 2:
             inimigo.rect.y = altura + 50
             espinhos.rect.y = altura + 50
+            soldado.rect.y = altura + 50
             if arbusto.voltas == 4:
                 arbusto.rect.y = altura + 50
             if arvore.voltas == 5:
@@ -36,8 +44,7 @@ while True:
             arvore.movimentar()
             inimigo.movimentar()
     if colisoes and colidiu == False:
-        ...
-        #colidiu = True
+        colidiu = True
     if colidiu:
         chao.denovo()
         arbusto.denovo()

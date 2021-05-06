@@ -46,10 +46,9 @@ inimigo = Inimigos()
 todasSprites.add(inimigo)
 grupo_sprite2.add(inimigo)
 
-
-
 ci = Ci()
 todasSprites.add(ci)
 
 colidiu = False
 espinhoOk = False
+soldadoOk = False

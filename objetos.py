@@ -50,13 +50,13 @@ class Ci(pygame.sprite.Sprite):
                 self.desce = True
                 self.pulo = False
             else:
-                self.rect.y -=45
+                self.rect.y -=35
         elif self.desce:
             if self.rect.y >= altura - 200:
                 self.rect.y = altura - 150
                 self.pulo = False   
                 self.desce = False
-            self.rect.y +=55
+            self.rect.y +=45
         elif self.siga:
             if self.rect.x >= 960:
                 self.siga = False
@@ -127,13 +127,14 @@ class Inimigos(Chao):
         self.pulo = False
         for i in range(2):
             img = inimigos_shet.subsurface((0 * i, 0),(32,32))
-            img= pygame.transform.scale(img, (32* 4, 32 * 4))
+            img = pygame.transform.scale(img, (32* 4, 32 * 4))
             self.inimigo_img.append(img)
         self.index_lista = 0
         self.image = self.inimigo_img[self.index_lista]
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
         self.rect.center = (1070, altura-120)
+    
     def movimentar(self):
         self.movimento = True
 class Sol(pygame.sprite.Sprite):
@@ -188,3 +189,49 @@ class Espinhos(Chao):
         self.rect = self.image.get_rect()
         self.rect.x = largura + 500
         self.rect.y = altura - 130
+class Soldado(Inimigos):
+    def __init__(self):
+        self.pulo = False
+        self.desce = False
+        self.voltasCompletas = 0
+        self.voltas = 0
+        pygame.sprite.Sprite.__init__(self)
+        self.velocidade = 10
+        self.movimento = False
+        self.inimigo_img = []
+        self.pulo = False
+        for i in range(2):
+            img = inimigos_shet.subsurface((32 * 3, 0),(32,32))
+            img = pygame.transform.scale(img, (32* 4, 32 * 4))
+            self.inimigo_img.append(img)
+        self.index_lista = 0
+        self.image = self.inimigo_img[self.index_lista]
+        self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect.center = (largura - 580, altura-120)
+    def update(self):
+        if self.movimento:
+            if self.rect.topright[0] < 0:
+                self.rect.x = largura + 200
+                self.voltas += 1
+                print(self.voltas)
+            if not self.pulo and not self.desce:
+                self.pulo = True
+            if self.pulo:
+                if self.rect.y <=100:
+                    self.desce = True
+                    self.pulo = False
+                else:
+                    self.rect.y -=15
+                    self.rect.x -=25
+            elif self.desce:
+                if self.rect.y >= altura - 200:
+                    self.rect.y = altura - 150
+                    self.pulo = False   
+                    self.desce = False
+                self.rect.y +=25
+                self.rect. x -= 15
+"""    if self.index_lista > 1:
+                self.index_lista = 0
+            self.index_lista += .10
+            self.image = self.ci_img[int(self.index_lista)]"""
