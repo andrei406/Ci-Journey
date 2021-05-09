@@ -50,13 +50,13 @@ class Ci(pygame.sprite.Sprite):
                 self.desce = True
                 self.pulo = False
             else:
-                self.rect.y -=35
+                self.rect.y -=45
         elif self.desce:
             if self.rect.y >= altura - 200:
                 self.rect.y = altura - 150
                 self.pulo = False   
                 self.desce = False
-            self.rect.y +=45
+            self.rect.y +=35
         elif self.siga:
             if self.rect.x >= 960:
                 self.siga = False
@@ -74,7 +74,7 @@ class Ci(pygame.sprite.Sprite):
             self.image = self.ci_img[int(self.index_lista)]
 class Chao(pygame.sprite.Sprite):
     def __init__(self, pos_x):
-        self.voltasCompletas = 0
+        self.voltasCompletas = 1
         self.voltas = 0
         self.movimento = False
         self.velocidade = 10
@@ -201,7 +201,7 @@ class Soldado(Inimigos):
         self.inimigo_img = []
         self.pulo = False
         for i in range(2):
-            img = inimigos_shet.subsurface((32 * 3, 0),(32,32))
+            img = inimigos_shet.subsurface((0, 32),(32,32))
             img = pygame.transform.scale(img, (32* 4, 32 * 4))
             self.inimigo_img.append(img)
         self.index_lista = 0

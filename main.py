@@ -18,12 +18,7 @@ while True:
     colisoes = pygame.sprite.spritecollide(ci, grupo_sprite2, False, pygame.sprite.collide_mask)
     if start:
         if chao.voltasCompletas == 1:
-            if espinhoOk == False:
-                espinhos = Espinhos()
-                todasSprites.add(espinhos)
-                grupo_sprite2.add(espinhos)
-                espinhos.movimentar()
-                espinhoOk = True
+
             if not soldadoOk:
                 soldado = Soldado()
                 todasSprites.add(soldado)
@@ -43,20 +38,33 @@ while True:
             arbusto.movimentar()
             arvore.movimentar()
             inimigo.movimentar()
+            espinhos.movimentar()
+
     if colisoes and colidiu == False:
-        colidiu = True
+        colidiu = False
     if colidiu:
         chao.denovo()
         arbusto.denovo()
         arvore.denovo()
         inimigo.denovo()
         inimigo.ficalonge()
+        if soldadoOk:
+            soldado.ficalonge()
+            soldado.denovo()
+        espinhos.ficalonge()
+        espinhos.denovo()
         fase2.stop()
         sleep(0.2)
         fim.play()
         sleep(4)
-        fase2.play()
+        fase2.play()y
         colidiu = False
     todasSprites.draw(tela)
     todasSprites.update()
     pygame.display.flip()
+"""            if espinhoOk == False:
+                espinhos = Espinhos()
+                todasSprites.add(espinhos)
+                grupo_sprite2.add(espinhos)
+                espinhos.movimentar()
+                espinhoOk = True"""

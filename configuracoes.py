@@ -34,6 +34,10 @@ todasSprites.add(espinhos)"""
 arbusto = Arbusto()
 todasSprites.add(arbusto)
 
+espinhos = Espinhos()
+todasSprites.add(espinhos)
+grupo_sprite2.add(espinhos)
+
 
 for c in range(largura*2//64):
     chao = Chao(c)
