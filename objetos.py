@@ -74,7 +74,7 @@ class Ci(pygame.sprite.Sprite):
             self.image = self.ci_img[int(self.index_lista)]
 class Chao(pygame.sprite.Sprite):
     def __init__(self, pos_x):
-        self.voltasCompletas = 1
+        self.voltasCompletas = 0
         self.voltas = 0
         self.movimento = False
         self.velocidade = 10

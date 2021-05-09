@@ -41,7 +41,7 @@ while True:
             espinhos.movimentar()
 
     if colisoes and colidiu == False:
-        colidiu = False
+        colidiu = True
     if colidiu:
         chao.denovo()
         arbusto.denovo()
@@ -57,7 +57,7 @@ while True:
         sleep(0.2)
         fim.play()
         sleep(4)
-        fase2.play()y
+        fase2.play()
         colidiu = False
     todasSprites.draw(tela)
     todasSprites.update()
