@@ -102,7 +102,7 @@ class Chao(pygame.sprite.Sprite):
             if self.rect.topright[0] < 0:
                 self.rect.x = largura + 200
                 self.voltas += 1
-                print(self.voltas)
+                #print(self.voltas)
             if self.voltas >= 5:
                 if self.velocidade <= 25:
                     self.velocidade += 5
