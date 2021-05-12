@@ -25,23 +25,31 @@ while True:
                 grupo_sprite2.add(soldado)
                 soldado.movimentar()
                 soldadoOk = True
-        if chao.voltasCompletas == 2:
-            inimigo.rect.y = altura + 50
-            espinhos.rect.y = altura + 50
-            soldado.rect.y = altura + 50
-            if arbusto.voltas == 4:
-                arbusto.rect.y = altura + 50
-            if arvore.voltas == 5:
-                arvore.rect.y = altura + 50
-        else:
-            chao.movimentar()
-            arbusto.movimentar()
-            arvore.movimentar()
-            inimigo.movimentar()
-            espinhos.movimentar()
+        
 
-    if colisoes and colidiu == False:
-        colidiu = True
+        if chao.voltas == 2:
+            inimigo.movimentar()
+        
+        if chao.voltas == 47:
+            inimigo.denovo()
+            espinhos.denovo()
+            arbusto.denovo()
+            arvore.denovo()
+
+        arqueiro.movimentar()
+        chao.movimentar()
+        arbusto.movimentar()
+        arvore.movimentar()
+        if chao.voltas == 4:
+            inimigo.voltas == chao.voltas
+        
+        if inimigo.velocidade >= 25:
+            colidir = True
+            espinhos.movimentar()
+            espinhos.voltas == chao.voltas
+
+    if colisoes and colidiu == False and colidir == True:
+        colidiu = False
     if colidiu:
         chao.denovo()
         arbusto.denovo()
@@ -53,7 +61,7 @@ while True:
             soldado.denovo()
         espinhos.ficalonge()
         espinhos.denovo()
-        fase2.stop()
+        fase3.stop()
         sleep(0.2)
         fim.play()
         sleep(4)
@@ -62,9 +70,16 @@ while True:
     todasSprites.draw(tela)
     todasSprites.update()
     pygame.display.flip()
-"""            if espinhoOk == False:
-                espinhos = Espinhos()
-                todasSprites.add(espinhos)
-                grupo_sprite2.add(espinhos)
-                espinhos.movimentar()
-                espinhoOk = True"""
+"""
+if chao.voltasCompletas == 2:
+            inimigo.rect.y = altura + 50
+            espinhos.rect.y = altura + 50
+            soldado.rect.y = altura + 50
+            if arbusto.voltas == 4:
+                arbusto.rect.y = altura + 50
+            if arvore.voltas == 5:
+                arvore.rect.y = altura + 50
+        
+        if chao.voltasCompletas == 2:
+            
+"""

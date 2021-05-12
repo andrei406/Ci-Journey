@@ -4,6 +4,7 @@ import pygame
 from pygame import locals
 import os
 a = 2
+velocidade = 5
 
 altura = 640
 largura = 1008
@@ -77,7 +78,7 @@ class Chao(pygame.sprite.Sprite):
         self.voltasCompletas = 0
         self.voltas = 0
         self.movimento = False
-        self.velocidade = 10
+        self.velocidade = velocidade
         pygame.sprite.Sprite.__init__(self)
         self.image = cenario_shet.subsurface(((32 * 3) - 32, 0), (32, 32))
         self.image = pygame.transform.scale(self.image, (32*a, 32*a))
@@ -102,26 +103,17 @@ class Chao(pygame.sprite.Sprite):
             if self.rect.topright[0] < 0:
                 self.rect.x = largura + 200
                 self.voltas += 1
-                #print(self.voltas)
-            if self.voltas >= 5:
+                print(self.voltas)
+            if self.voltas >= 3:
                 if self.velocidade <= 25:
                     self.velocidade += 5
-                elif self.voltas == 30:
-                    if self.velocidade <= 30:
-                        self.velocidade += 5
-                elif self.voltas == 40:
-                    # A cada volta completa equilvame 40 voltas
-                    self.voltasCompletas += 1
-                    self.velocidade = 10
-                    self.voltas = 0
-
             self.rect.x -= self.velocidade
 class Inimigos(Chao):
     def __init__(self):
         self.voltasCompletas = 0
         self.voltas = 0
         pygame.sprite.Sprite.__init__(self)
-        self.velocidade = 10
+        self.velocidade = velocidade
         self.movimento = False
         self.inimigo_img = []
         self.pulo = False
@@ -153,36 +145,58 @@ class Lua(Sol):
         self.rect = self.image.get_rect()
         self.rect.x = largura - 90
         self.rect.y = altura - 620
+
 class Arvore(Chao):
     def __init__(self):
         self.voltasCompletas = 0
         self.voltas = 0
         self.movimento = False
-        self.velocidade = 10
+        self.velocidade = velocidade
         pygame.sprite.Sprite.__init__(self)
         self.image = cenario_shet.subsurface((0,64), (32,32))
         self.image = pygame.transform.scale(self.image, (32* 7, 32*7))
         self.rect = self.image.get_rect()
         self.rect.x = largura - 300
         self.rect.y = altura - 270
+    def update(self):
+        if self.movimento:
+            if self.rect.topright[0] < 0:
+                self.rect.x = largura + 100
+                self.voltas += 1
+                print(self.voltas)
+            if self.voltas >= 3:
+                if self.velocidade <= 25:
+                    self.velocidade += 5
+            self.rect.x -= self.velocidade
 class Arbusto(Chao):
     def __init__(self):
         self.voltasCompletas = 0
         self.voltas = 0
         self.movimento = False
-        self.velocidade = 10
+        self.velocidade = velocidade
         pygame.sprite.Sprite.__init__(self)
         self.image = cenario_shet.subsurface((32, 64), (32, 32))
         self.image = pygame.transform.scale(self.image, (32 * 5, 32 *5))
         self.rect = self.image.get_rect()
         self.rect.x = largura - 700
         self.rect.y = altura - 190
+    def update(self):
+        if self.movimento:
+            if self.rect.topright[0] < 0:
+                self.rect.x = largura + 100
+                self.voltas += 1
+                print(self.voltas)
+            if self.voltas >= 3:
+                if self.velocidade <= 25:
+                    self.velocidade += 5
+            self.rect.x -= self.velocidade
+#inimigos
 class Espinhos(Chao):
     def __init__(self):
         self.voltasCompletas = 0
         self.voltas = 0
         self.movimento = False
-        self.velocidade = 10
+        self.velocidade = velocidade
         pygame.sprite.Sprite.__init__(self)
         self.image = cenario_shet.subsurface((32 * 2, 32* 2), (32, 32))
         self.image = pygame.transform.scale(self.image, (32 * 3, 32 * 3))
@@ -196,7 +210,7 @@ class Soldado(Inimigos):
         self.voltasCompletas = 0
         self.voltas = 0
         pygame.sprite.Sprite.__init__(self)
-        self.velocidade = 10
+        self.velocidade = velocidade
         self.movimento = False
         self.inimigo_img = []
         self.pulo = False
@@ -231,7 +245,38 @@ class Soldado(Inimigos):
                     self.desce = False
                 self.rect.y +=25
                 self.rect. x -= 15
-"""    if self.index_lista > 1:
-                self.index_lista = 0
-            self.index_lista += .10
-            self.image = self.ci_img[int(self.index_lista)]"""
+class Arqueiro(Inimigos):
+    def __init__(self):
+        self.voltasCompletas = 0
+        self.voltas = 0
+        pygame.sprite.Sprite.__init__(self)
+        self.velocidade = velocidade
+        self.movimento = False
+        self.inimigo_img = []
+        self.pulo = False
+        for i in range(2):
+            img = inimigos_shet.subsurface((32 * 3, 32 * 1),(32,32))
+            img = pygame.transform.scale(img, (32* 4, 32 * 4))
+            self.inimigo_img.append(img)
+        self.index_lista = 0
+        self.image = self.inimigo_img[self.index_lista]
+        self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect.center = (800, altura-210)
+    def update(self):
+        ok = False
+        if self.movimento:
+            if self.rect.topright[0] < 0:
+                if not ok:
+                    self.rect.x = largura + 250
+                    ok = True
+                elif ok:
+                    self.rect.x = largura + -100
+                    ok = False
+
+                self.voltas += 1
+                print(self.voltas)
+            if self.voltas >= 3:
+                if self.velocidade <= 25:
+                    self.velocidade += 5
+            self.rect.x -= self.velocidade
